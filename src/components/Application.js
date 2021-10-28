@@ -18,7 +18,7 @@ export default function Application(props) {
     appointments: {}
   })
 
-  const dailyAppointments = getAppointmentsForDay(state.appointments, state.day);
+  const dailyAppointments = getAppointmentsForDay(state, state.day);
 
   const setDay = day => setState(prev => ({ ...prev, day}));
   /* const setDays = days => {
@@ -42,8 +42,8 @@ export default function Application(props) {
       console.log(all[1]); // second
       console.log(all[2]); // third
       const [first, second, third] = all;  
-      console.log(first, second, third);
-      setState(prev => ({ ...prev, days: all[0], appointments: all[1] }))
+      //console.log(first, second, third);
+      setState(prev => ({ ...prev, days: first.data, appointments: second.data }))
     });
 
 
