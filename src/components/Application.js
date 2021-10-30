@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import "components/Application.scss";
 import DayList from "./DayList";
 import Appointment from "./Appointment";
-import { getAppointmentsForDay } from 'helpers/selectors.js'
+import { getAppointmentsForDay, getInterview, getInterviewersForDay } from 'helpers/selectors.js'
 
 import axios from "axios";
 
@@ -15,10 +15,12 @@ export default function Application(props) {
   const [state, setState] = useState({
     day: "Monday",
     days: [],
-    appointments: {}
+    appointments: {},
+    interviewers: {}
   })
 
   const dailyAppointments = getAppointmentsForDay(state, state.day);
+  const dailyInterviewers = getInterviewersForDay(state, state.day);
 
   const setDay = day => setState(prev => ({ ...prev, day}));
   /* const setDays = days => {
@@ -38,21 +40,24 @@ export default function Application(props) {
       Promise.resolve(axios.get('/api/appointments')),
       Promise.resolve(axios.get('/api/interviewers')),
     ]).then((all) => {
-      console.log(all[0]); // first
-      console.log(all[1]); // second
-      console.log(all[2]); // third
+      //console.log(all[0]); // first
+      //console.log(all[1]); // second
+      //console.log("interviewers", all[2]); // third
       const [first, second, third] = all;  
       //console.log(first, second, third);
-      setState(prev => ({ ...prev, days: first.data, appointments: second.data }))
+      setState(prev => ({ ...prev, days: first.data, appointments: second.data, interviewers: third.data }))
     });
 
 
   }, []);
 
 
-  const renderAppointments = dailyAppointments.map(element => {
+  const renderAppointments = dailyAppointments.map(appointment => {
+    //console.log("print the appointments from render appointsment", appointment)
+    
+    const interview = getInterview(state, appointment.interview);
     return (
-      <Appointment key={element.id} {...element}/>
+      <Appointment key={appointment.id} interview={interview} {...appointment} interviewers={dailyInterviewers}/>
     )
   })
 
