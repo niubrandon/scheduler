@@ -23,16 +23,6 @@ export default function Application(props) {
   const dailyInterviewers = getInterviewersForDay(state, state.day);
 
   const setDay = day => setState(prev => ({ ...prev, day}));
-  /* const setDays = days => {
-    setState(prev => ({ ...prev, days }));
-  } */
-
- /*  useEffect(() => {
-    axios.get('/api/days').then((response) => {
-      console.log("response from server for get url", response.data);
-      //setDays(response.data)
-    } )
-  }, []); */
 
   useEffect(() => {
     Promise.all([
@@ -40,24 +30,39 @@ export default function Application(props) {
       Promise.resolve(axios.get('/api/appointments')),
       Promise.resolve(axios.get('/api/interviewers')),
     ]).then((all) => {
-      //console.log(all[0]); // first
-      //console.log(all[1]); // second
-      //console.log("interviewers", all[2]); // third
       const [first, second, third] = all;  
-      //console.log(first, second, third);
       setState(prev => ({ ...prev, days: first.data, appointments: second.data, interviewers: third.data }))
     });
 
 
   }, []);
 
+  const bookInterview = (id, interview) => {
+    console.log("bookInterview invoked");
+    console.log("reading the input params from bookinterview", id, interview);
+    //added the new bookedapoointment to the database
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview }
+    };
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+    
+    setState({...state, appointments});
+    
+  }
+
+  useEffect(() => {
+    console.log("state changed to", state);
+  },[state])
 
   const renderAppointments = dailyAppointments.map(appointment => {
-    //console.log("print the appointments from render appointsment", appointment)
-    
+
     const interview = getInterview(state, appointment.interview);
     return (
-      <Appointment key={appointment.id} interview={interview} {...appointment} interviewers={dailyInterviewers}/>
+      <Appointment key={appointment.id} interview={interview} {...appointment} interviewers={dailyInterviewers} bookInterview={bookInterview}/>
     )
   })
 
@@ -87,7 +92,7 @@ export default function Application(props) {
       </section>
       <section className="schedule">
        {renderAppointments}
-       <Appointment key="last" time="5pm" />
+      
       </section>
     
     </main>

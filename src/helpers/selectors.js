@@ -43,22 +43,22 @@ export function getInterviewersForDay(state, day) {
   }
  
   const filteredInterviewersFromDay = Object.values(state.appointments).filter(element => filteredAppointments[0].appointments.includes(element.id) && element.interview);
-  console.log("filtered interview list on that day with interview not null is", filteredInterviewersFromDay);
+  //console.log("filtered interview list on that day with interview not null is", filteredInterviewersFromDay);
   let interviewersList = [];
   for (const ele of filteredInterviewersFromDay) {
     if (!interviewersList.includes(ele.interview.interviewer)) {
       interviewersList.push(ele.interview.interviewer)
     }
   }  
-  console.log("filtered interview list on that day with interview not null is", filteredInterviewersFromDay);
-  console.log("interviewersList is", interviewersList)
+  //console.log("filtered interview list on that day with interview not null is", filteredInterviewersFromDay);
+  //console.log("interviewersList is", interviewersList)
 
   if (interviewersList.length === 0) {
     return [];
   }
   const filteredInterviewers = Object.values(state.interviewers).filter(interviewer => interviewersList.includes(interviewer.id))
 
-  console.log("!!!!!interviewers results", filteredInterviewers);
+  
     return filteredInterviewers;
  
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import "components/Appointment/style.scss";
 import Header from 'components/Appointment/Header.js';
 import Show from 'components/Appointment/Show.js';
@@ -9,16 +9,34 @@ import { useVisualMode } from 'hooks/useVisualMode';
 
 
 export default function Appointment (props) {
-  console.log("this is appointment component", props.interview)
+
   const EMPTY = "EMPTY";
   const SHOW = "SHOW";
   const CREATE = "CREATE";
   const {mode, transition, back} = useVisualMode(props.interview ? SHOW : EMPTY);
-  console.log("currently mode is:", mode);
+  //console.log("currently mode is:", mode);
+
+  const save = (name, interviewer) => {
+    const interview = {
+      student: name,
+      interviewer: interviewer
+    };
+    console.log("onSave function is called", interview)
+    console.log("modifying appointment", props.id)
+    props.bookInterview(props.id, interview);
+    console.log("now transits to show");
+    
+    console.log("transition to show completed");
+    //transition("SHOW"); 
+  }
+
+
+
+
   return (
     <>
       <Header time={props.time} />
-      {mode === CREATE && <Form onCancel={() => back()} interviewers={props.interviewers}/>}
+      {mode === CREATE && <Form onCancel={() => back()}  onSave={save} interviewers={props.interviewers}  />}
       {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
       {mode === SHOW && (
         <Show

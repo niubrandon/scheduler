@@ -9,12 +9,21 @@ export function useVisualMode(inputMode) {
     setMode(inputMode);
   }, []);
 
+  useEffect(() => {
+    console.log("*****the updated mode is", mode);
+  },[mode])
+
+
   const transition = (newMode, replace = false) => {
-    setMode(newMode);  
+    
+    console.log("new mode is set to", newMode);
+    setMode(newMode); 
+
     if(replace) {
       history.pop(); 
     }
     setHistory(prev => [...prev, newMode])
+   
   };
 
   const back = () => {
