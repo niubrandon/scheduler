@@ -41,7 +41,7 @@ export default function Application(props) {
     console.log("bookInterview invoked");
     console.log("reading the input params from bookinterview", id, interview);
     //added the new bookedapoointment to the database
-    const appointment = {
+  /*    const appointment = {
       ...state.appointments[id],
       interview: { ...interview }
     };
@@ -49,10 +49,18 @@ export default function Application(props) {
       ...state.appointments,
       [id]: appointment
     };
-    
-    setState({...state, appointments});
+     */
+    //setState({...state, appointments});
+
+    return axios.put(`/api/appointments/${id}`, { interview: interview });
     
   }
+
+
+  const deleteInterview = (id) => {
+    console.log("deleteInterview triggered for appointment", id);
+    return axios.delete(`/api/appointments/${id}`);
+  };
 
   useEffect(() => {
     console.log("state changed to", state);
@@ -62,7 +70,7 @@ export default function Application(props) {
 
     const interview = getInterview(state, appointment.interview);
     return (
-      <Appointment key={appointment.id} interview={interview} {...appointment} interviewers={dailyInterviewers} bookInterview={bookInterview}/>
+      <Appointment key={appointment.id} interview={interview} {...appointment} interviewers={dailyInterviewers} bookInterview={bookInterview} deleteInterview={deleteInterview} state={state} setState={setState}/>
     )
   })
 

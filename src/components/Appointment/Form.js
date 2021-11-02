@@ -20,7 +20,7 @@ export default function Form(props) {
   };
 
   const onClickButton = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     props.onSave(student, interviewer);
 
   };
