@@ -43,12 +43,33 @@ export default function Appointment (props) {
       ...props.state.appointments,
       [props.id]: appointment
     };
-    
+
+
+    const dayIndex = props.state.days.findIndex(element => element.name === props.state.day);
+
+    const daySpots = {
+     ...props.state.days[dayIndex],
+     spots: props.state.days[dayIndex].spots - 1
+   }
+
+   const daysSpots = {
+     ...props.state.days,
+     [dayIndex] : daySpots
+   }
+
+   const days = Object.values(daysSpots)
+
+  //  console.log('dayIndex', dayIndex)
+    console.log("daySpots", daySpots);
+    console.log("daysSpots", daysSpots);
+    console.log("days are", days);
+
     props.bookInterview(props.id, interview).then((res) => {
       console.log("geting response from server", res);
-      props.setState({...props.state, appointments})
+      
+      props.setState({...props.state, appointments, days})
       transition(SHOW);
-      //props.updateSpots();
+     
     }
     ).catch(err => {
       console.log(err);
@@ -83,11 +104,29 @@ export default function Appointment (props) {
       ...props.state.appointments,
       [props.id]: appointment
     }
+
+
+
+    const dayIndex = props.state.days.findIndex(element => element.name === props.state.day);
+    
+    const daySpots = {
+     ...props.state.days[dayIndex],
+     spots: props.state.days[dayIndex].spots + 1
+   }
+
+   const daysSpots = {
+     ...props.state.days,
+     [dayIndex] : daySpots
+   }
+
+   const days = Object.values(daysSpots)
+
+
     props.deleteInterview(props.id).then(res => {
       //set interview to null
       console.log("deleted got server response")
       transition(EMPTY);
-      props.setState({...props.state, appointments});
+      props.setState({...props.state, appointments, days});
       
      
     }).catch(err => {

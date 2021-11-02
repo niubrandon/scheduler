@@ -26,27 +26,6 @@ export function useApplicationData() {
 
   }, []);
 
-  const updateSpots = () => {
-  /*  
-    const availableSpots = getAppointmentsForDay(state, state.day).filter(element => !element.interview).length;
-    const dayIndex = state.days.findIndex(element => element.name === state.day);
-     console.log("get dayIndex and available spots", dayIndex, availableSpots );
-    console.log("get state days on that day with spots", state.days[dayIndex].spots );
-     const daySpots = {
-      ...state.days[dayIndex],
-      spots: availableSpots
-    }
-
-    const daysSpots = {
-      ...state.days,
-      [dayIndex] : daySpots
-    }
-    
-    setState({...state, daysSpots})   
-    console.log("show the elemtn value", document.getElementById(`dayspots${dayIndex}`).value); */
-;
-
-  }
 
 
   const bookInterview = (id, interview) => {
@@ -66,10 +45,11 @@ export function useApplicationData() {
   
 
   useEffect(() => {
-    console.log("state changed to", state);
+    console.log("*****state changed to", state);
+    console.log("STATE.DAYS", state.days)
   
    
   },[state])
 
-  return {state, setState, setDay, bookInterview, deleteInterview, updateSpots}
+  return {state, setState, setDay, bookInterview, deleteInterview}
 };
