@@ -56,6 +56,12 @@ export default function Application(props) {
     
   }
 
+  const editInterview = (id, interview) => {
+    console.log("Editing interview function invoked");
+    //need modify data
+    return axios.patch(`/api/appointments/${id}`, {interview: interview});
+  }
+
 
   const deleteInterview = (id) => {
     console.log("deleteInterview triggered for appointment", id);
