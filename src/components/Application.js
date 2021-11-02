@@ -4,6 +4,7 @@ import "components/Application.scss";
 import DayList from "./DayList";
 import Appointment from "./Appointment";
 import { getAppointmentsForDay, getInterview, getInterviewersForDay } from 'helpers/selectors.js'
+import { useApplicationData } from 'hooks/useApplicationDate';
 
 import axios from "axios";
 
@@ -40,26 +41,9 @@ export default function Application(props) {
   const bookInterview = (id, interview) => {
     console.log("bookInterview invoked");
     console.log("reading the input params from bookinterview", id, interview);
-    //added the new bookedapoointment to the database
-  /*    const appointment = {
-      ...state.appointments[id],
-      interview: { ...interview }
-    };
-    const appointments = {
-      ...state.appointments,
-      [id]: appointment
-    };
-     */
-    //setState({...state, appointments});
 
     return axios.put(`/api/appointments/${id}`, { interview: interview });
     
-  }
-
-  const editInterview = (id, interview) => {
-    console.log("Editing interview function invoked");
-    //need modify data
-    return axios.patch(`/api/appointments/${id}`, {interview: interview});
   }
 
 

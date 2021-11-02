@@ -7,6 +7,7 @@ import Form from './Form';
 import { useVisualMode } from 'hooks/useVisualMode';
 import Status from './Status';
 import Confirm from './Confirm';
+import Error from './Error';
 
 
 
@@ -18,6 +19,8 @@ export default function Appointment (props) {
   const SAVING = "SAVING";
   const CONFIRMING = "CONFIRMING";
   const EDIT = "EDIT";
+  const ERROR_SAVE = "ERROR_SAVE";
+  const ERROR_DELETE = "ERROR_DELETE";
   const {mode, transition, back} = useVisualMode(props.interview ? SHOW : EMPTY);
 
 
@@ -46,10 +49,11 @@ export default function Appointment (props) {
       props.setState({...props.state, appointments})
       transition(SHOW);
     }
-    ).catch(err => console.log(err));;
-    console.log("now transits to show");
-    
-    console.log("transition to show completed");
+    ).catch(err => {
+      console.log(err);
+      transition(ERROR_SAVE, true);
+    });
+  
      
     //change to saving first
   }
@@ -60,7 +64,7 @@ export default function Appointment (props) {
     e.preventDefault();
     
 
-    transition(CONFIRMING);
+    transition(CONFIRMING, true);
 
     
     //transition(EMPTY)
@@ -69,7 +73,7 @@ export default function Appointment (props) {
   }
 
   const confirmDeleteInterview = () => {
-    transition(SAVING);
+    transition(SAVING, true);
     const appointment = {
       ...props.state.appointments[props.id],
       interview: null
@@ -87,14 +91,12 @@ export default function Appointment (props) {
      
     }).catch(err => {
       console.log(err);
+      transition(ERROR_DELETE, true);
     });
 
   }
 
-  const editInterview = () => {
-    console.log("Editing interview")
-  }
-
+  
 
   return (
     <>
@@ -115,7 +117,9 @@ export default function Appointment (props) {
          {mode === SAVING && <Status />}
          {mode === CONFIRMING && <Confirm onCancel={() => back()} onConfirm={() => confirmDeleteInterview()} />}
          {mode === EDIT && <Form  onCancel={() => back()} student={props.interview.student} interviewer={props.interview.interviewer} mode={mode} onEdit={save} interviewers={props.interviewers}/>}
-      
+
+         {mode === ERROR_DELETE && <Error onClose={() => back()} />}
+         {mode === ERROR_SAVE && <Error onClose={() => back()} />}
       <article className="appointment">{props.time ? `Appointment at ${props.time}` : "No Appointments"}</article>
 
     </>
