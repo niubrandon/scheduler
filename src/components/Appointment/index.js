@@ -48,13 +48,14 @@ export default function Appointment (props) {
       console.log("geting response from server", res);
       props.setState({...props.state, appointments})
       transition(SHOW);
+      //props.updateSpots();
     }
     ).catch(err => {
       console.log(err);
       transition(ERROR_SAVE, true);
     });
   
-     
+    
     //change to saving first
   }
 

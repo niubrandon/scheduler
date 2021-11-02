@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function Show(props) {
-  console.log("****interviewer is ", props.interviewer)
+  //console.log("****interviewer is ", props.interviewer)
 
   return (
     <main className="appointment__card appointment__card--show">
