@@ -22,7 +22,7 @@ export default function Application(props) {
  
    
     return (
-      <Appointment key={appointment.id} interview={interview} interviewer={interview.interviewer.name} {...appointment} interviewers={dailyInterviewers} bookInterview={bookInterview} deleteInterview={deleteInterview} state={state} setState={setState} />
+      <Appointment key={appointment.id} interview={interview} interviewer={interview && interview.interviewer.name} {...appointment} interviewers={dailyInterviewers} bookInterview={bookInterview} deleteInterview={deleteInterview} state={state} setState={setState} />
     )
   })
 

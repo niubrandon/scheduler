@@ -17,6 +17,7 @@ export default function Appointment (props) {
   const SHOW = "SHOW";
   const CREATE = "CREATE";
   const SAVING = "SAVING";
+  const DELETING = "DELETING";
   const CONFIRMING = "CONFIRMING";
   const EDIT = "EDIT";
   const ERROR_SAVE = "ERROR_SAVE";
@@ -95,7 +96,7 @@ export default function Appointment (props) {
   }
 
   const confirmDeleteInterview = () => {
-    transition(SAVING, true);
+    transition(DELETING, true);
     const appointment = {
       ...props.state.appointments[props.id],
       interview: null
@@ -154,7 +155,8 @@ export default function Appointment (props) {
       )}
          {mode === CREATE && <Form onCancel={() => back()}  onSave={save} interviewers={props.interviewers}  />}
 
-         {mode === SAVING && <Status />}
+         {mode === SAVING && <Status message="Saving"/>}
+         {mode === DELETING && <Status message="Deleting"/>}
          {mode === CONFIRMING && <Confirm onCancel={() => back()} onConfirm={() => confirmDeleteInterview()} />}
          {mode === EDIT && <Form  onCancel={() => back()} student={props.interview.student} interviewer={props.interview.interviewer} mode={mode} onEdit={save} interviewers={props.interviewers}/>}
 
