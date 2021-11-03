@@ -8,6 +8,7 @@ export default function Form(props) {
 
   const [student, setStudent] = useState(props.student || "");
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
+  const [error, setError] = useState("");
  
   const reset = () => {
     setStudent("");
@@ -19,18 +20,39 @@ export default function Form(props) {
     props.onCancel();
   };
 
+ /*  const validate = () => {
+    if (student === "") {
+      setError("Student name cannot be blank");
+      return;
+    }
+  
+    props.onSave(student, interviewer);
+  } */
+
   const onClickButton = (e) => {
     e.preventDefault();
+    if (student === "") {
+      setError("Student name cannot be blank");
+      return;
+    }
+    setError("");
     props.onSave(student, interviewer);
+   
 
   };
 
   const onClickButtonEdit = (e) => {
     e.preventDefault();
+    if (student === "") {
+      setError("Student name cannot be blank");
+      return;
+    } 
+    setError("");
     props.onEdit(student, interviewer);
   }
-  //placeholder={props.mode === "EDIT" ? props.student : "Enter your name"}
-  //value={props.mode === "EDIT" && props.student}
+
+
+
   return (
     <main className="appointment__card appointment__card--create">
       <section className="appointment__card-left">
@@ -38,11 +60,14 @@ export default function Form(props) {
           <input
             className="appointment__create-input text--semi-bold"
             name="name"
-            type="text"          
-            placeholder={props.mode === "EDIT" ? props.student : "Enter your name"}
+            type="text"
+            value={student}
+            data-testid="student-name-input"          
+            placeholder={props.mode === "EDIT" ? props.student : "Enter Student Name"}
             onChange={(e) => setStudent(e.target.value) }
           />
         </form>
+        <section className="appointment__validation">{error}</section>
         <InterviewerList 
           interviewers={props.interviewers} setInterviewer={setInterviewer} value={interviewer}
         />

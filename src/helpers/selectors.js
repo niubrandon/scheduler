@@ -44,12 +44,8 @@ export function getInterviewersForDay(state, day) {
 
   const interviewersFromThatDay = filteredAppointments[0].interviewers;
  
-
-  if (interviewersFromThatDay.length === 0) {
-    return [];
-  }
   const filteredInterviewers = Object.values(state.interviewers).filter(interviewer => interviewersFromThatDay.includes(interviewer.id))
-
+  //console.log("getInterviewersForDay invoked", filteredInterviewers)
   
     return filteredInterviewers;
  
