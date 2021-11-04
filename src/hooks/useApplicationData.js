@@ -1,6 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useReducer } from 'react';
 import axios from "axios";
 
+
+//ongoing inplementation of useReducer
+function reducer(state, action) {
+  if (action.type === "add") {
+    return state + action.value;
+  } 
+  if (action.type === "delete") {
+    return state - action.value;
+  }
+  return state;
+}
 
 export function useApplicationData() {
   const [state, setState] = useState({
@@ -9,6 +20,7 @@ export function useApplicationData() {
     appointments: {},
     interviewers: {}
   })
+
 
   const setDay = day => setState(prev => ({ ...prev, day}));
 
