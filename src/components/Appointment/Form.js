@@ -48,7 +48,7 @@ export default function Form(props) {
       return;
     } 
     setError("");
-    props.onEdit(student, interviewer);
+    props.onEdit(student, interviewer, true);
   }
 
 

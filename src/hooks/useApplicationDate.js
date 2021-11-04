@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
-import { getAppointmentsForDay, getInterview, getInterviewersForDay } from 'helpers/selectors.js'
 
 
 export function useApplicationData() {
@@ -29,8 +28,6 @@ export function useApplicationData() {
 
 
   const bookInterview = (id, interview) => {
-    console.log("bookInterview invoked");
-    console.log("reading the input params from bookinterview", id, interview);
 
     return axios.put(`/api/appointments/${id}`, { interview: interview });
     
@@ -38,16 +35,14 @@ export function useApplicationData() {
 
 
   const deleteInterview = (id) => {
-    console.log("deleteInterview triggered for appointment", id);
+
     return axios.delete(`/api/appointments/${id}`);
   };
 
   
 
   useEffect(() => {
-    console.log("*****state changed to", state);
-    console.log("STATE.DAYS", state.days)
-  
+    console.log("*****state changed to*****", state); 
    
   },[state])
 

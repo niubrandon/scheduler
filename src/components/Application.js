@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import "components/Application.scss";
 import DayList from "./DayList";
 import Appointment from "./Appointment";
 import { getAppointmentsForDay, getInterview, getInterviewersForDay } from 'helpers/selectors.js'
 import { useApplicationData } from 'hooks/useApplicationDate';
-
-
 
 
 export default function Application(props) {
@@ -19,8 +17,7 @@ export default function Application(props) {
   const renderAppointments = dailyAppointments.map(appointment => {
 
     const interview = getInterview(state, appointment.interview);
- 
-   
+    
     return (
       <Appointment key={appointment.id} interview={interview} interviewer={interview && interview.interviewer.name} {...appointment} interviewers={dailyInterviewers} bookInterview={bookInterview} deleteInterview={deleteInterview} state={state} setState={setState} />
     )

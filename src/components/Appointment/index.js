@@ -25,7 +25,7 @@ export default function Appointment (props) {
   const {mode, transition, back} = useVisualMode(props.interview ? SHOW : EMPTY);
 
 
-  const save = (name, interviewer) => {
+  const save = (name, interviewer, onEditMode = false) => {
     const interview = {
       student: name,
       interviewer: interviewer
@@ -35,7 +35,6 @@ export default function Appointment (props) {
     transition(SAVING);
 
 
-    //passing these infor from application 
     const appointment = {
       ...props.state.appointments[props.id],
       interview: { ...interview }
@@ -45,12 +44,11 @@ export default function Appointment (props) {
       [props.id]: appointment
     };
 
-
     const dayIndex = props.state.days.findIndex(element => element.name === props.state.day);
 
     const daySpots = {
      ...props.state.days[dayIndex],
-     spots: props.state.days[dayIndex].spots - 1
+     spots: props.state.days[dayIndex].spots - (!onEditMode && 1)
    }
 
    const daysSpots = {
@@ -60,39 +58,26 @@ export default function Appointment (props) {
 
    const days = Object.values(daysSpots)
 
-  //  console.log('dayIndex', dayIndex)
-    console.log("daySpots", daySpots);
-    console.log("daysSpots", daysSpots);
-    console.log("days are", days);
-
     props.bookInterview(props.id, interview).then((res) => {
       console.log("geting response from server", res);
-      
+     
       props.setState({...props.state, appointments, days})
+    
       transition(SHOW);
      
     }
     ).catch(err => {
-      console.log(err);
+    
       transition(ERROR_SAVE, true);
     });
-  
-    
-    //change to saving first
+
   }
 
   const deleteInterview = (e) => {
-    console.log("delete button clicked", props.id);
-
+ 
     e.preventDefault();
     
-
     transition(CONFIRMING, true);
-
-    
-    //transition(EMPTY)
-
-    
   }
 
   const confirmDeleteInterview = () => {
@@ -105,8 +90,6 @@ export default function Appointment (props) {
       ...props.state.appointments,
       [props.id]: appointment
     }
-
-
 
     const dayIndex = props.state.days.findIndex(element => element.name === props.state.day);
     
@@ -124,8 +107,7 @@ export default function Appointment (props) {
 
 
     props.deleteInterview(props.id).then(res => {
-      //set interview to null
-      console.log("deleted got server response")
+
       transition(EMPTY);
       props.setState({...props.state, appointments, days});
       
@@ -138,7 +120,6 @@ export default function Appointment (props) {
   }
 
   
-
   return (
     <>
       <Header time={props.time} />

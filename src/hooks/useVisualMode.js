@@ -10,13 +10,12 @@ export function useVisualMode(inputMode) {
   }, []);
 
   useEffect(() => {
-    console.log("*****the updated mode is", mode);
+   
   },[mode])
 
 
   const transition = (newMode, replace = false) => {
     
-    console.log("new mode is set to", newMode);
     setMode(newMode); 
 
     if(replace) {
