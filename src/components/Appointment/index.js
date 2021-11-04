@@ -60,8 +60,8 @@ export default function Appointment (props) {
 
     props.bookInterview(props.id, interview).then((res) => {
       console.log("geting response from server", res);
-     
-      props.setState({...props.state, appointments, days})
+      props.saveAppointment(appointments, days);
+      //props.setState({...props.state, appointments, days})
     
       transition(SHOW);
      
@@ -109,8 +109,8 @@ export default function Appointment (props) {
     props.deleteInterview(props.id).then(res => {
 
       transition(EMPTY);
-      props.setState({...props.state, appointments, days});
-      //props.setState({...props.state, appointments});
+      props.deleteAppointment(appointments, days);
+      //props.setState({...props.state, appointments, days});
      
     }).catch(err => {
       console.log(err);

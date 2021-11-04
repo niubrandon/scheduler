@@ -9,7 +9,7 @@ import { useApplicationData } from 'hooks/useApplicationData';
 
 export default function Application(props) {
 
-  const {state, setState, setDay, bookInterview, deleteInterview} = useApplicationData();
+  const {state, dispatch, setDay, bookInterview, deleteInterview, saveAppointment, deleteAppointment} = useApplicationData();
 
   const dailyAppointments = getAppointmentsForDay(state, state.day);
   const dailyInterviewers = getInterviewersForDay(state, state.day);
@@ -19,7 +19,7 @@ export default function Application(props) {
     const interview = getInterview(state, appointment.interview);
     
     return (
-      <Appointment key={appointment.id} interview={interview} interviewer={interview && interview.interviewer.name} {...appointment} interviewers={dailyInterviewers} bookInterview={bookInterview} deleteInterview={deleteInterview} state={state} setState={setState} />
+      <Appointment key={appointment.id} interview={interview} interviewer={interview && interview.interviewer.name} {...appointment} interviewers={dailyInterviewers} bookInterview={bookInterview} deleteInterview={deleteInterview} state={state} dispatch={dispatch} saveAppointment={saveAppointment} deleteAppointment={deleteAppointment} />
     )
   })
 
