@@ -90,7 +90,7 @@ export default function Appointment (props) {
       ...props.state.appointments,
       [props.id]: appointment
     }
-
+//refactor using reducer in custom hooks
     const dayIndex = props.state.days.findIndex(element => element.name === props.state.day);
     
     const daySpots = {
@@ -104,13 +104,13 @@ export default function Appointment (props) {
    }
 
    const days = Object.values(daysSpots)
-
+ 
 
     props.deleteInterview(props.id).then(res => {
 
       transition(EMPTY);
       props.setState({...props.state, appointments, days});
-      
+      //props.setState({...props.state, appointments});
      
     }).catch(err => {
       console.log(err);
