@@ -19,7 +19,7 @@ export function useApplicationData() {
       case SET_DAY:
         return ({...state, day: action.value});
       case FETCH_DATA:
-        return {...state, days: action.value[0].data, appointments: action.value[1].data, interviewers: action.value[2].data};
+        return {...state, days: action.value[0], appointments: action.value[1], interviewers: action.value[2]};
       case SAVE_APPOINTMENT:
         return {...state, appointments: action.appointments, days: action.days};
       case DELETE_APPOINTMENT:
@@ -30,24 +30,6 @@ export function useApplicationData() {
       
   }
 
-   /*  if (action.type === "FETCH_DATA") {
-      return {...state, days: action.value[0].data, appointments: action.value[1].data, interviewers: action.value[2].data}
-    } 
-    if (action.type === "SET_DAY") {
-      return ({...state, day: action.value});
-    }
-    if (action.type === "DELETE_APPOINTMENT") {
-     
-      return {...state, appointments: action.appointments, days: action.days};
-    }
-
-    if (action.type === "SAVE_APPOINTMENT") {
-      return {...state, appointments: action.appointments, days: action.days}
-    }
-
-  
-    return state; */
-  
 
   const [state, dispatch] = useReducer(
     reducer, 
@@ -81,7 +63,7 @@ export function useApplicationData() {
     ]).then((all) => {
       const [first, second, third] = all;  
 
-      dispatch({type: "FETCH_DATA", value: [first, second, third]})
+      dispatch({type: "FETCH_DATA", value: [first.data, second.data, third.data]})
     });
 
 
