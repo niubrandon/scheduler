@@ -7,7 +7,7 @@ A web application that allows users to book and cancel interviews. It combines a
 - Test Driven Development with isolation components development, unit testing, integration testing and end to end testing 
 
 ## UI
-![mainpage] (https://github.com/niubrandon/scheduler/blob/master/public/images/bookappointment.png?raw=true)
+![mainpage](https://github.com/niubrandon/scheduler/blob/master/public/images/bookappointment.png?raw=true)
 ## Cypress integration and end to end automated testing
 ![demo](https://github.com/niubrandon/scheduler/blob/master/public/images/schedulervideo.gif?raw=true)
 ## Setup
