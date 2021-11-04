@@ -1,5 +1,13 @@
 # Interview Scheduler
 
+
+## Project features
+- users can book, modify and delete appointment
+
+
+
+## Cypress integration and end to end automated testing
+![demo]()
 ## Setup
 
 Install dependencies with `npm install`.
@@ -20,4 +28,9 @@ npm test
 
 ```sh
 npm run storybook
+```
+## Running cypress end to end automated testing
+
+```sh
+npm run cypress
 ```
