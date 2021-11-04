@@ -1,11 +1,13 @@
 # Interview Scheduler
-
+A web application that allows users to book and cancel interviews. It combines a concise API with a WebSocket server to build a realtime experience
 
 ## Project features
 - users can book, modify and delete appointment
+- used design patterns controlled components, React Hooks (useState, useEffect and custom hooks)
+- Test Driven Development with isolation components development, unit testing, integration testing and end to end testing 
 
-
-
+## UI
+![mainpage] (https://github.com/niubrandon/scheduler/blob/master/public/images/bookappointment.png?raw=true)
 ## Cypress integration and end to end automated testing
 ![demo](https://github.com/niubrandon/scheduler/blob/master/public/images/schedulervideo.gif?raw=true)
 ## Setup
