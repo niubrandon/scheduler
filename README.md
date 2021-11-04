@@ -7,7 +7,7 @@
 
 
 ## Cypress integration and end to end automated testing
-![demo]()
+![demo](https://github.com/niubrandon/scheduler/blob/master/public/images/schedulervideo.gif?raw=true)
 ## Setup
 
 Install dependencies with `npm install`.
