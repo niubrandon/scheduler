@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 export function useVisualMode(inputMode) {
 
-  const [mode, setMode] = useState("");
+  const [mode, setMode] = useState([]);
   const [history, setHistory] = useState([inputMode])
 
   useEffect(() => {
@@ -10,20 +10,11 @@ export function useVisualMode(inputMode) {
   }, []);
 
   useEffect(() => {
-   
-  },[mode])
+   console.log("history log", history)
+  },[history])
 
 
-  const transition = (newMode, replace = false) => {
-    
-    setMode(newMode); 
-
-    if(replace) {
-      history.pop(); 
-    }
-    setHistory(prev => [...prev, newMode])
-   
-  };
+  
 
   const back = () => {
     if (history.length >= 2) {
@@ -32,7 +23,18 @@ export function useVisualMode(inputMode) {
       setMode(history[history.length - 1]);
       return;
     } 
-  } 
+  }
+  
+  const transition = (newMode, replace = false) => {
+
+    if(replace) {
+      back();
+    }
+    setMode(newMode);
+    history.push(newMode);
+    setHistory(history);
+   
+  };
 
   return {mode, transition, back};
 

@@ -3,7 +3,7 @@ A web application that allows users to book and cancel interviews. It combines a
 
 ## Project features
 - users can book, modify and delete appointment
-- used design patterns controlled components, React Hooks (useState, useEffect and custom hooks)
+- used design patterns controlled components, React Hooks (useState, useEffectm useReducer and custom hooks)
 - Test Driven Development with isolation components development, unit testing, integration testing and end to end testing 
 
 ## UI

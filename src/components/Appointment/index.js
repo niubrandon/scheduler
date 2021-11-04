@@ -76,7 +76,7 @@ export default function Appointment (props) {
   const deleteInterview = (e) => {
  
     e.preventDefault();
-    
+  //  
     transition(CONFIRMING, true);
   }
 
@@ -138,10 +138,10 @@ export default function Appointment (props) {
 
          {mode === SAVING && <Status message="Saving"/>}
          {mode === DELETING && <Status message="Deleting"/>}
-         {mode === CONFIRMING && <Confirm onCancel={() => back()} onConfirm={() => confirmDeleteInterview()} />}
+         {mode === CONFIRMING && <Confirm onCancel={() => transition(SHOW)} onConfirm={() => confirmDeleteInterview()} />}
          {mode === EDIT && <Form  onCancel={() => back()} student={props.interview.student} interviewer={props.interview.interviewer} mode={mode} onEdit={save} interviewers={props.interviewers}/>}
 
-         {mode === ERROR_DELETE && <Error onClose={() => back()} />}
+         {mode === ERROR_DELETE && <Error onClose={() => back()}/>}
          {mode === ERROR_SAVE && <Error onClose={() => back()} />}
       <article className="appointment">{props.time ? `Appointment at ${props.time}` : "No Appointments"}</article>
 
