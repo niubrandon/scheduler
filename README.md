@@ -6,7 +6,7 @@ A web application that allows users to book and cancel interviews. It combines a
 - used design patterns controlled components, React Hooks (useState, useEffectm useReducer and custom hooks)
 - Test Driven Development with isolation components development, unit testing, integration testing and end to end testing
 - Hosted server on Heroku
-- Integrated continuous pipeline with CircleCI and Netlify 
+- Integrated continuous pipeline with CircleCI
 ## UI
 ![mainpage](https://github.com/niubrandon/scheduler/blob/master/public/images/bookappointment.png?raw=true)
 ## Cypress integration and end to end automated testing
