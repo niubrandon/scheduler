@@ -94,24 +94,6 @@ describe("Application", () => {
     expect(getByText(day, "2 spots remaining")).toBeInTheDocument();
   });
 
-  it.skip("loads data, edits an interview and keeps the spots remaining for Monday the same", () => {
-    //under development
-    
-  })
-
-  it.skip("shows the save error when failing to save an appointment", () => {
-    //mock the mock error -- under development
-  
-    axios.put.mockRejectedValueOnce();
-  
-  })
-
-  it.skip("shows the delete error when failing to delete an existing appointment", () => {
-    //under development
-
-    axios.delete.mockRejectedValueOnce();
-
-  })
 
 })
 
