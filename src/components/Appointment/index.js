@@ -121,31 +121,36 @@ export default function Appointment (props) {
 
   
   return (
-    <>
+  
+    
+    <article className="appointment_add" data-testid="appointment">
       <Header time={props.time} />
    
-      {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
-      {mode === SHOW && (
-        <Show
-          student={props.interview.student}
-          interviewer={props.interviewer}
-          onCancel={back}
-          onDelete={deleteInterview}
-          onEdit={() => transition(EDIT)}
-        />
-      )}
-         {mode === CREATE && <Form onCancel={() => back()}  onSave={save} interviewers={props.interviewers}  />}
+        {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
+        {mode === SHOW && props.interview && (
+          <Show
+            student={props.interview.student}
+            interviewer={props.interviewer}
+            onCancel={back}
+            onDelete={deleteInterview}
+            onEdit={() => transition(EDIT)}
+          />
+          )}
+          {mode === CREATE && <Form onCancel={() => back()}  onSave={save} interviewers={props.interviewers}  />}
 
-         {mode === SAVING && <Status message="Saving"/>}
-         {mode === DELETING && <Status message="Deleting"/>}
-         {mode === CONFIRMING && <Confirm onCancel={() => transition(SHOW)} onConfirm={() => confirmDeleteInterview()} />}
-         {mode === EDIT && <Form  onCancel={() => back()} student={props.interview.student} interviewer={props.interview.interviewer} mode={mode} onEdit={save} interviewers={props.interviewers}/>}
+          {mode === SAVING && <Status message="Saving"/>}
+          {mode === DELETING && <Status message="Deleting"/>}
+          {mode === CONFIRMING && <Confirm onCancel={() => transition(SHOW)} onConfirm={() => confirmDeleteInterview()} message="Are you sure you would like to delete?" />}
+          {mode === EDIT && <Form  onCancel={() => back()} student={props.interview.student} interviewer={props.interview.interviewer} mode={mode} onEdit={save} interviewers={props.interviewers}/>}
 
-         {mode === ERROR_DELETE && <Error onClose={() => back()}/>}
-         {mode === ERROR_SAVE && <Error onClose={() => back()} />}
-      <article className="appointment">{props.time ? `Appointment at ${props.time}` : "No Appointments"}</article>
+          {mode === ERROR_DELETE && <Error onClose={() => back()}/>}
+          {mode === ERROR_SAVE && <Error onClose={() => back()} />}
 
-    </>
+        
+      
+      </article>
+
+  
    
   )
 }

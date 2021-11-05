@@ -1,35 +1,11 @@
 import React, { useState, useEffect, useReducer } from 'react';
 import axios from "axios";
-
-
-//ongoing inplementation of useReducer
-
+import reducer, {
+  SET_DAY, FETCH_DATA, SAVE_APPOINTMENT, DELETE_APPOINTMENT
+} from "reducers/application"
 
 export function useApplicationData() {
   
-  const SET_DAY = "SET_DAY";
-  const FETCH_DATA = "FETCH_DATA";
-  const SAVE_APPOINTMENT = "SAVE_APPOINTMENT";
-  const DELETE_APPOINTMENT = "DELETE_APPOINTMENT";
-
-  function reducer(state, action) {
-
-    // eslint-disable-next-line default-case
-    switch (action.type) {
-      case SET_DAY:
-        return ({...state, day: action.value});
-      case FETCH_DATA:
-        return {...state, days: action.value[0], appointments: action.value[1], interviewers: action.value[2]};
-      case SAVE_APPOINTMENT:
-        return {...state, appointments: action.appointments, days: action.days};
-      case DELETE_APPOINTMENT:
-        return {...state, appointments: action.appointments, days: action.days};
-      default:
-        return state;   
-    }
-      
-  }
-
 
   const [state, dispatch] = useReducer(
     reducer, 
