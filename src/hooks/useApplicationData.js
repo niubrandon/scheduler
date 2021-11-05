@@ -1,52 +1,10 @@
 import React, { useState, useEffect, useReducer } from 'react';
 import axios from "axios";
-
-
-//ongoing inplementation of useReducer
-
+import reducer, {
+  SET_DAY, FETCH_DATA, SAVE_APPOINTMENT, DELETE_APPOINTMENT
+} from "reducers/application"
 
 export function useApplicationData() {
-  
-  const SET_DAY = "SET_DAY";
-  const FETCH_DATA = "FETCH_DATA";
-  const SAVE_APPOINTMENT = "SAVE_APPOINTMENT";
-  const DELETE_APPOINTMENT = "DELETE_APPOINTMENT";
-
-  function reducer(state, action) {
-
-    // eslint-disable-next-line default-case
-    switch (action.type) {
-      case SET_DAY:
-        return ({...state, day: action.value});
-      case FETCH_DATA:
-        return {...state, days: action.value[0].data, appointments: action.value[1].data, interviewers: action.value[2].data};
-      case SAVE_APPOINTMENT:
-        return {...state, appointments: action.appointments, days: action.days};
-      case DELETE_APPOINTMENT:
-        return {...state, appointments: action.appointments, days: action.days};
-      default:
-        return state;   
-    }
-      
-  }
-
-   /*  if (action.type === "FETCH_DATA") {
-      return {...state, days: action.value[0].data, appointments: action.value[1].data, interviewers: action.value[2].data}
-    } 
-    if (action.type === "SET_DAY") {
-      return ({...state, day: action.value});
-    }
-    if (action.type === "DELETE_APPOINTMENT") {
-     
-      return {...state, appointments: action.appointments, days: action.days};
-    }
-
-    if (action.type === "SAVE_APPOINTMENT") {
-      return {...state, appointments: action.appointments, days: action.days}
-    }
-
-  
-    return state; */
   
 
   const [state, dispatch] = useReducer(
@@ -81,7 +39,7 @@ export function useApplicationData() {
     ]).then((all) => {
       const [first, second, third] = all;  
 
-      dispatch({type: "FETCH_DATA", value: [first, second, third]})
+      dispatch({type: "FETCH_DATA", value: [first.data, second.data, third.data]})
     });
 
 

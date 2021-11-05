@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
 
-
+//obosolete file, refactored with useReducer
 export function useApplicationData() {
   const [state, setState] = useState({
     day: "Monday",
