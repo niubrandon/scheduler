@@ -23,12 +23,12 @@ export default function reducer(state, action) {
       })[0];
 
       const changeSpot = (state, action) => {
-        if (action.interview && state.appointments[action.id].interview) {
+        if (!action.interview) {
+          return 1;
+        } else if (action.interview && state.appointments[action.id].interview) {
           return 0;
-        } else if (!action.interview && state.appointments[action.id].interview) {
-          return -1;
         } else if (action.interview && !state.appointments[action.id].interview) {
-          return 1
+          return -1
         }
         return 0;
       }
