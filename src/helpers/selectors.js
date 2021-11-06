@@ -6,13 +6,11 @@ export function getAppointmentsForDay(state, day) {
   if (filteredAppointments.length === 0) {
     return [];
   }
-  //console.log("filteredAppointments", filteredAppointments[0].appointments);
-  //console.log("object values from appointsment", Object.values(state.appointments))
+
   
  
   const filteredAppointmentsFromDay = Object.values(state.appointments).filter(element => filteredAppointments[0].appointments.includes(element.id))  
 
-  //console.log("filteredAppointments", filteredAppointmentsFromDay);
     return filteredAppointmentsFromDay;
 
 }
@@ -20,7 +18,7 @@ export function getAppointmentsForDay(state, day) {
 export function getInterview(state, interview) {
 
   if (!interview) {
-    //console.log("result from getInterviewe function when no interview", {});
+
     return null;
   }
 
@@ -29,9 +27,7 @@ export function getInterview(state, interview) {
     resultObj.student = interview.student;
 
     resultObj.interviewer = state.interviewers[interview.interviewer];
-  
-  
-  //console.log("result from getInterviewe function is", resultObj);
+
   return resultObj ;
 }
 
@@ -45,7 +41,6 @@ export function getInterviewersForDay(state, day) {
   const interviewersFromThatDay = filteredAppointments[0].interviewers;
  
   const filteredInterviewers = Object.values(state.interviewers).filter(interviewer => interviewersFromThatDay.includes(interviewer.id))
-  //console.log("getInterviewersForDay invoked", filteredInterviewers)
   
     return filteredInterviewers;
  

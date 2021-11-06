@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useReducer } from 'react';
 import axios from "axios";
 import reducer, {
-  SET_DAY, FETCH_DATA, SAVE_APPOINTMENT, DELETE_APPOINTMENT
+  SET_DAY, FETCH_DATA, SAVE_APPOINTMENT, DELETE_APPOINTMENT, SET_INTERVIEW
 } from "reducers/application"
+
 
 export function useApplicationData() {
   
@@ -46,9 +47,24 @@ export function useApplicationData() {
   }, []);
 
 
+  
+  useEffect(() => {
+    if (process.env.REACT_APP_WEBSOCKET_URL) {
+      const webSocket = new WebSocket(process.env.REACT_APP_WEBSOCKET_URL);
+
+       webSocket.onmessage = function(event) {
+         const data = JSON.parse(event.data);
+         if (data.type === "SET_INTERVIEW") {
+          dispatch(data)
+         }
+       }
+       return (() => webSocket.close())  
+    }
+ 
+  },[dispatch])
 
   const bookInterview = (id, interview) => {
-
+   
     return axios.put(`/api/appointments/${id}`, { interview: interview });
     
   }
