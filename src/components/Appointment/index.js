@@ -24,14 +24,22 @@ export default function Appointment (props) {
   const ERROR_DELETE = "ERROR_DELETE";
   const {mode, transition, back} = useVisualMode(props.interview ? SHOW : EMPTY);
 
+  useEffect(() => {
+    if (props.interview && mode === EMPTY) {
+      transition(SHOW)
+    }
+
+    if (!props.interview && mode === SHOW) {
+      transition(EMPTY)
+    }
+  }, [props.interview, transition, mode])
 
   const save = (name, interviewer, onEditMode = false) => {
     const interview = {
       student: name,
       interviewer: interviewer
     };
-    console.log("onSave function is called", interview)
-    console.log("modifying appointment", props.id);
+
     transition(SAVING);
 
 
@@ -76,7 +84,6 @@ export default function Appointment (props) {
   const deleteInterview = (e) => {
  
     e.preventDefault();
-  //  
     transition(CONFIRMING, true);
   }
 
