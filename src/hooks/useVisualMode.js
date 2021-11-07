@@ -3,24 +3,23 @@ import { useState, useEffect } from 'react';
 export function useVisualMode(inputMode) {
 
   const [mode, setMode] = useState([]);
-  const [history, setHistory] = useState([inputMode])
+  const [history, setHistory] = useState([])
 
   useEffect(() => {
     setMode(inputMode);
+    setHistory([inputMode])
   }, []);
 
   useEffect(() => {
-   console.log("history log", history)
+   //console.log("history log", history)
+   setMode(history[history.length - 1]);
   },[history])
-
-
-  
 
   const back = () => {
     if (history.length >= 2) {
-      history.pop();
-      setHistory(history)
-      setMode(history[history.length - 1]);
+      let copyHistory = [...history];
+      copyHistory.pop();
+      setHistory(prevState => ([...copyHistory]));
       return;
     } 
   }
@@ -31,8 +30,7 @@ export function useVisualMode(inputMode) {
       back();
     }
     setMode(newMode);
-    history.push(newMode);
-    setHistory(history);
+    setHistory(prevState => ([...prevState, newMode]));
    
   };
 
