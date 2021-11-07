@@ -55,7 +55,8 @@
     "collectCoverageFrom": [
       "src/**/*.js",
       "!src/index.js",
-      "!src/hooks/useApplicationData_useState.js"
+      "!src/hooks/useApplicationData_useState.js",
+      "!src/reducers/application.js"
     ]
   },
   "proxy": "http://localhost:8001"
