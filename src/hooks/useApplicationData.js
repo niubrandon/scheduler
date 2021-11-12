@@ -1,8 +1,6 @@
-import React, { useState, useEffect, useReducer } from 'react';
+import { useEffect, useReducer } from 'react';
 import axios from "axios";
-import reducer, {
-  SET_DAY, FETCH_DATA, SAVE_APPOINTMENT, DELETE_APPOINTMENT, SET_INTERVIEW
-} from "reducers/application"
+import reducer from "reducers/application"
 
 
 export function useApplicationData() {

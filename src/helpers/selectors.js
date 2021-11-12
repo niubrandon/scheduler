@@ -1,4 +1,3 @@
-import React from "react";
 
 export function getAppointmentsForDay(state, day) {
   const filteredAppointments = state.days.filter(appointment => appointment.name === day);

@@ -1,5 +1,4 @@
 import React from "react";
-import ClassNames from "classnames";
 import InterviewerListItem from "./InterviewerlistItem";
 import "components/InterviewerList.scss";
 import PropTypes from 'prop-types';

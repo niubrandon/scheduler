@@ -8,7 +8,7 @@ export function useVisualMode(inputMode) {
   useEffect(() => {
     setMode(inputMode);
     setHistory([inputMode])
-  }, []);
+  }, [inputMode]);
 
   useEffect(() => {
    //console.log("history log", history)
